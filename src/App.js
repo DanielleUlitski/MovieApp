@@ -51,28 +51,6 @@ class App extends Component {
     }
   }
 
-  pageFlip = (dir) => {
-    //dynamically handle all pagination buttons
-    let page = this.state.page;
-    switch (dir) {
-      case "next":
-        page++;
-        this.getPage(page);
-        break;
-      case "back":
-        page--
-        this.getPage(page)
-        break;
-      case "last":
-        this.getPage(this.state.lastP);
-        break;
-      case "first":
-        this.getPage(1);
-        break;
-      default:
-    }
-  }
-
   getPage = (page) => {
     if (page < 1 || page > this.state.lastP) return;
     axios.get(`http://www.omdbapi.com/?apikey=9394bd62&s=${this.state.s}&page=${page}`)
