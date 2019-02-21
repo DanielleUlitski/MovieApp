@@ -24,30 +24,36 @@ class App extends Component {
   }
 
   search = (movieTitle, date) => {
-    if (this.state.error) this.setState({ error: undefined });
-    movieTitle = movieTitle.replace(/ /g, "+");
-    if (date) {
-      axios.get(`http://www.omdbapi.com/?apikey=9394bd62&s=${movieTitle}&y=${date}`)
-        .then((res) => {
-          if (res.data.Error) throw new Error(res.data.Error);
-          //calculating how many pages are there for pagination
-          let lastP = (res.data.totalResults % 10) ? (((res.data.totalResults - (res.data.totalResults % 10)) / 10) + 1) : (res.data.totalResults / 10);
-          this.setState({ data: res.data, s: movieTitle, lastP });
-        })
-        .catch((err) => {
-          this.setState({ error: err });
-        })
-    } else {
-      axios.get(`http://www.omdbapi.com/?apikey=9394bd62&s=${movieTitle}`)
-        .then((res) => {
-          if (res.data.Error) throw new Error(res.data.Error);
-          //calculating how many pages are there for pagination
-          let lastP = (res.data.totalResults % 10) ? (((res.data.totalResults - (res.data.totalResults % 10)) / 10) + 1) : (res.data.totalResults / 10);
-          this.setState({ data: res.data, s: movieTitle, lastP });
-        })
-        .catch((err) => {
-          this.setState({ error: err });
-        })
+    try {
+      if (movieTitle === "") throw new Error("Must have a Movie Title");
+      if (this.state.error) this.setState({ error: undefined });
+      movieTitle = movieTitle.replace(/ /g, "+");
+      if (date) {
+        axios.get(`http://www.omdbapi.com/?apikey=9394bd62&s=${movieTitle}&y=${date}`)
+          .then((res) => {
+            if (res.data.Error) throw new Error(res.data.Error);
+            //calculating how many pages are there for pagination
+            let lastP = (res.data.totalResults % 10) ? (((res.data.totalResults - (res.data.totalResults % 10)) / 10) + 1) : (res.data.totalResults / 10);
+            this.setState({ data: res.data, s: movieTitle, lastP });
+          })
+          .catch((err) => {
+            this.setState({ error: err, lastP: null });
+          })
+      } else {
+        axios.get(`http://www.omdbapi.com/?apikey=9394bd62&s=${movieTitle}`)
+          .then((res) => {
+            if (res.data.Error) throw new Error(res.data.Error);
+            //calculating how many pages are there for pagination
+            let lastP = (res.data.totalResults % 10) ? (((res.data.totalResults - (res.data.totalResults % 10)) / 10) + 1) : (res.data.totalResults / 10);
+            this.setState({ data: res.data, s: movieTitle, lastP });
+          })
+          .catch((err) => {
+            this.setState({ error: err, lastP: null });
+          })
+      }
+    }
+    catch (err) {
+      this.setState({ error: err, lastP: null });
     }
   }
 
@@ -59,7 +65,7 @@ class App extends Component {
         this.setState({ data: res.data, page });
       })
       .catch((err) => {
-        this.setState({ error: err });
+        this.setState({ error: err, lastP: null });
       });
   }
 
