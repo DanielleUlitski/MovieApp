@@ -1,33 +1,143 @@
-.App {
-  text-align: center;
+.error {
+  color: rgb(253, 69, 69);
+  border-bottom: solid rgb(255, 79, 79) 1px;
+  
+  /* border-radius: 12px; */
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.error2 {
+  width: auto;
+  margin: 20% 20%;
+  font-size: 5em;
+  font-weight: bold;
+  background-color: rgb(206, 24, 24);
   color: white;
+  text-align: center;
+  border-radius: 13px;
 }
 
-.App-link {
-  color: #61dafb;
+.main {
+  background-color: rgb(50, 152, 211);
+  /* color: rgb(0, 0, 0); */
+  border-radius: 5px;
+  text-align: center;
+  cursor: pointer;
+  display: inline;
+  padding: 5px 10px;
+  margin-left: 5px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.main:hover {
+  background-color: rgb(86, 177, 230);
+}
+
+.main:active {
+  background-color: rgb(31, 107, 151);
+  color: rgb(255, 255, 255);
+}
+
+.pagination {
+  margin: auto;
+  width: 200px;
+  right: 10px;
+  color: grey;
+  font-weight: 500;
+  font-size: 1.5em;
+}
+
+.pagination-btn {
+  cursor: pointer;
+  display: inline;
+  margin-right: 5px;
+}
+
+.input {
+  height: 15px;
+  padding: 5px;
+  margin: 5px;
+  width: 15%;
+}
+
+.search {
+  background-color: rgb(104, 102, 102);
+}
+
+.btn-container {
+  display: inline;
+  width: 30%;
+}
+
+.input-group {
+  width: 100%;
+}
+
+.movies {
+  width: 100%;
+  position: absolute;
+}
+
+.movie-card {
+  max-width: 20%;
+  height: 500px;
+  overflow: scroll;
+  display: inline-block;
+}
+
+.movie-card span {
+  display: block;
+}
+
+@media only screen and (max-width: 1605px) {
+  .movie-card {
+    max-width: 25%;
   }
-  to {
-    transform: rotate(360deg);
+}
+@media only screen and (max-width: 1285px) {
+  .movie-card {
+    max-width: 50%;
+  }
+}
+@media only screen and (max-width: 650px){
+  .btn-container {
+    width: 100%;
+  }
+
+  .input-group {
+    width: 100%;
+  }
+
+  .main {
+    display: block;
+    width: auto;
+    margin: 5px;
+  }
+
+  .input {
+    width: 42%;
+  }
+
+  .error {
+    width: auto;
+    margin: 0px 25%;
+    text-align: center;
+  }
+
+  .movie-card {
+    max-width: 75%;
+    display:block;
+    margin: auto;
+  }
+}
+
+@media only screen and (max-width: 440px) {
+  .movie-card {
+    max-width: 100%;
+    display: inline;
+  }
+}
+
+@media only screen and (max-width: 316px) {
+  .input {
+    margin: 3px;
   }
 }
